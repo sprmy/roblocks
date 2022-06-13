@@ -175,7 +175,22 @@ local function ESPRefresh()
         end
     end)
 end
+local function gunmod()
+    local gun = game:GetService("Players").LocalPlayer.Backpack:GetChildren()
+    local b = (unpack(gun))
+    local gun2 = require(b.Config)
 
+    --MAKE SURE TO ONLY HAVE 1 GUN IN YOUR INVENTORY FOR THIS TO WORK. RECOMMEND ANTI-MAT
+
+    gun2["Firerate"] = value
+    gun2["Recoil"] = { .01, .01, .01, .01 } 
+    --gun2["FireMode"] = Auto
+    gun2["DamageIndicationNumber"] = false
+    gun2["ReloadSpeed"] = value
+    gun2["Bulletspread"] = value
+end
+
+    
 
     
 
@@ -185,13 +200,16 @@ end
 
 --UI-- 
 local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
-
+--WINDOWS--
 local w = library:CreateWindow("OCS") -- Creates the window
-
+local w2 = library:CreateWindow("GUN MOD")
+--FOLDERS--
 local b = w:CreateFolder("ESP Main") -- Creates the folder(U will put here your buttons,etc)
 local c = w:CreateFolder("Rare Item ESP")
 local d = w:CreateFolder("Item TPs")
 local e = w:CreateFolder("Auto Refresh")
+local b2 = w2:CreateFolder("Mods")
+--BUTTONS--
 b:Button("Item Esp",function()
     ItemEsp()
 end)
@@ -216,3 +234,68 @@ end)
 d:Button("LaunchCode TP",function()
     LaunchCodeTP()
 end)
+
+
+--SLIDER--
+b2:Slider("Firerate",{
+    min = 10; -- min value of the slider
+    max = 5000; -- max value of the slider
+    precise = false; -- max 2 decimals
+},function(value)
+    local gun = game:GetService("Players").LocalPlayer.Backpack:GetChildren()
+    local b = (unpack(gun))
+    local gun2 = require(b.Config)
+
+    --MAKE SURE TO ONLY HAVE 1 GUN IN YOUR INVENTORY FOR THIS TO WORK. RECOMMEND ANTI-MAT
+
+    gun2["Firerate"] = value
+end)
+
+b2:Slider("Bulletspread",{
+    min = 10; -- min value of the slider
+    max = 0; -- max value of the slider
+    precise = false; -- max 2 decimals
+},function(value)
+    local gun = game:GetService("Players").LocalPlayer.Backpack:GetChildren()
+    local b = (unpack(gun))
+    local gun2 = require(b.Config)
+
+    --MAKE SURE TO ONLY HAVE 1 GUN IN YOUR INVENTORY FOR THIS TO WORK. RECOMMEND ANTI-MAT
+
+    gun2["Bulletspread"] = value
+end)
+
+b2:Slider("Reloadspeed",{
+    min = 10; -- min value of the slider
+    max = 0; -- max value of the slider
+    precise = false; -- max 2 decimals
+},function(value)
+    local gun = game:GetService("Players").LocalPlayer.Backpack:GetChildren()
+    local b = (unpack(gun))
+    local gun2 = require(b.Config)
+
+    --MAKE SURE TO ONLY HAVE 1 GUN IN YOUR INVENTORY FOR THIS TO WORK. RECOMMEND ANTI-MAT
+
+    gun2["ReloadSpeed"] = value
+end)
+
+b2:Slider("Recoil",{
+    min = 10; -- min value of the slider
+    max = 0; -- max value of the slider
+    precise = false; -- max 2 decimals
+},function(value)
+    local gun = game:GetService("Players").LocalPlayer.Backpack:GetChildren()
+    local b = (unpack(gun))
+    local gun2 = require(b.Config)
+
+    --MAKE SURE TO ONLY HAVE 1 GUN IN YOUR INVENTORY FOR THIS TO WORK. RECOMMEND ANTI-MAT
+
+    gun2["Recoil"] = {value, value, value, value}
+end)
+
+
+
+
+
+print("SCRIPT LOADED - Make sure to only have 1 gun in your backpack for modding to work. Having multiple items breaks it so just drop the other items and mod.")
+print("If you want to delete this print statements go to the raw script and remove them at the end of the script")
