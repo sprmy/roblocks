@@ -26,20 +26,35 @@ local function ItemEsp()
         end
     end
 end
-local function ItemEspLC()
+local function ItemEspRare()
+    local items = {
+    "LaunchCodes",
+    "Binoculars",
+    "Minigun",
+    "Laser Gatling",
+    "RAD-Serum",
+    "FEV-Serum",
+    "T-60",
+    "APA",
+    "Tesla APA",
+    "T-50",
+    "T-51",
+    "Note",
+    "T-45",
+}
     local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
     for i,v in next, nodepath:GetDescendants() do
         if v.Name == "Part" then
-            if v.Parent.Name == "LaunchCodes" then
-            local bbG = Instance.new("BillboardGui")
-            local TxtLbl = Instance.new("TextLabel")
+            if table.find(items,v.Parent.Name) then
+                local bbG = Instance.new("BillboardGui")
+                local TxtLbl = Instance.new("TextLabel")
     
             bbG.Parent = v
             bbG.AlwaysOnTop = true
             bbG.Size = UDim2.new(0,15,0,15)
             
             TxtLbl.Parent = bbG
-            TxtLbl.BackgroundColor3 = Color3.fromRGB(0,0,255)
+            TxtLbl.BackgroundColor3 = Color3.fromRGB(0,255,0)
             TxtLbl.BackgroundTransparency = 1
             TxtLbl.Size = UDim2.new(5,0,5,0)
             TxtLbl.TextColor3 = Color3.fromRGB(0,0,255)
@@ -52,17 +67,32 @@ end
 local function ItemEspClear()
     local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
     for i,v in next, nodepath:GetDescendants() do
-        if v.Name == "Part" then
-                v.BillboardGui:Destroy()
+        if v.Name == "BillboardGui" then
+                v:Destroy()
         end
     end
 end
-local function TeleportToLC()
+local function RareItemTP()
+    local items = {
+    "LaunchCodes",
+    "Binoculars",
+    "Minigun",
+    "Laser Gatling",
+    "RAD-Serum",
+    "FEV-Serum",
+    "T-60",
+    "APA",
+    "Tesla APA",
+    "T-50",
+    "T-51",
+    "Note",
+    "T-45",
+}
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
     local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
     for i,v in next, nodepath:GetDescendants() do
         if v.Name == "Part" then
-            if v.Parent.Name == "LaunchCodes" then
+            if table.find(items,v.Parent.Name) then
                 plr.CFrame = v.CFrame
             end
         end
@@ -90,25 +120,13 @@ local function FEVSerumTP()
         end
     end
 end
-local function RADSerumESP()
+local function LaunchCodeTP()
+    local plr =  game.Players.LocalPlayer.Character.HumanoidRootPart
     local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
     for i,v in next, nodepath:GetDescendants() do
         if v.Name == "Part" then
-            if v.Parent.Name == "RAD-Serum" then
-            local bbG = Instance.new("BillboardGui")
-            local TxtLbl = Instance.new("TextLabel")
-    
-            bbG.Parent = v
-            bbG.AlwaysOnTop = true
-            bbG.Size = UDim2.new(0,15,0,15)
-            
-            TxtLbl.Parent = bbG
-            TxtLbl.BackgroundColor3 = Color3.fromRGB(255,0,0)
-            TxtLbl.BackgroundTransparency = 1
-            TxtLbl.Size = UDim2.new(5,0,5,0)
-            TxtLbl.TextColor3 = Color3.fromRGB(0,0,255)
-            TxtLbl.Text = v.Parent.Name
-            TxtLbl.TextScaled = false
+            if v.Parent.Name == "LaunchCodes" then
+                plr.CFrame = v.CFrame
             end
         end
     end
@@ -136,42 +154,32 @@ local function FEVSerumESP()
         end
     end
 end
-
-local function APAESP()
-  local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
-    for i,v in next, nodepath:GetDescendants() do
-        if v.Name == "Part" then
-            if v.Parent.Name == "FEV-Serum" then
+local function ESPRefresh()
+    local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
+    nodepath.DescendantAdded:connect(function(part)
+        if part.Name == "Part" and part.Parent:IsA("Model") then
             local bbG = Instance.new("BillboardGui")
             local TxtLbl = Instance.new("TextLabel")
     
-            bbG.Parent = v
+            bbG.Parent = part
             bbG.AlwaysOnTop = true
             bbG.Size = UDim2.new(0,15,0,15)
             
             TxtLbl.Parent = bbG
-            TxtLbl.BackgroundColor3 = Color3.fromRGB(255,0,0)
+            TxtLbl.BackgroundColor3 = Color3.fromRGB(0,255,0)
             TxtLbl.BackgroundTransparency = 1
             TxtLbl.Size = UDim2.new(5,0,5,0)
-            TxtLbl.TextColor3 = Color3.fromRGB(0,0,255)
-            TxtLbl.Text = v.Parent.Name
+            TxtLbl.TextColor3 = Color3.fromRGB(0,255,0)
+            TxtLbl.Text = part.Parent.Name
             TxtLbl.TextScaled = false
-            end
         end
-    end
+    end)
 end
 
-local function APATP()
-  local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
-    local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
-    for i,v in next, nodepath:GetDescendants() do
-        if v.Name == "Part" then
-            if v.Parent.Name == "FEV-Serum" then
-                plr.CFrame = v.CFrame
-            end
-        end
-    end
-end
+
+    
+
+
 
 
 
@@ -183,45 +191,28 @@ local w = library:CreateWindow("OCS") -- Creates the window
 local b = w:CreateFolder("ESP Main") -- Creates the folder(U will put here your buttons,etc)
 local c = w:CreateFolder("Rare Item ESP")
 local d = w:CreateFolder("Item TPs")
+local e = w:CreateFolder("Auto Refresh")
 b:Button("Item Esp",function()
     ItemEsp()
 end)
 
-c:Button("Launch Code ESP",function()
-    ItemEspLC()
+c:Button("Rare Item ESP",function()
+    ItemEspRare()
 end)
 
 b:Button("Clear Esp",function()
     ItemEspClear()
 end)
 
-d:Button("LaunchCodes TP",function()
-    TeleportToLC()
+d:Button("Rare Item TP",function()
+    RareItemTP()
 end)
 
-d:Button("FEV-Serum TP",function()
-    FEVSerumTP()
+e:Toggle("Auto ESP",function(bool)
+    shared.toggle = bool
+    ESPRefresh()
 end)
 
-d:Button("RAD-Serum TP",function()
-    RADSerumESP()
+d:Button("LaunchCode TP",function()
+    LaunchCodeTP()
 end)
-
-c:Button("RAD-Serum ESP",function()
-    RADSerumESP()
-end)
-
-c:Button("FEV-Serum ESP",function()
-    FEVSerumESP()
-end)
-
-c:Button("APA ESP",function()
-  APAESP()
-end)
-
-d:Button("APA TP",function()
-  APATP()
-end)
-
-
-
