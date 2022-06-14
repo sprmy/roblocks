@@ -40,7 +40,7 @@ local function ItemEspRare()
     "T-50",
     "T-51",
     "Note",
-    "T-45",
+    "T-45"
 }
     local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
     for i,v in next, nodepath:GetDescendants() do
@@ -89,7 +89,7 @@ local function RareItemTP()
     "T-50",
     "T-51",
     "Note",
-    "T-45",
+    "T-45"
 }
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
     local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
@@ -217,6 +217,36 @@ local function StorageCrateESP()
     end
     end
 end
+local function nukeroomtp()
+    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+    plr.CFrame = CFrame.new(-3316.52148, -260.623383, 1203.83423)
+end
+local function npctrader1tp()
+    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+    plr.CFrame = CFrame.new(-1766.13025, 373.750183, 1493.84497)
+end
+local function heliosonetp()
+    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+    plr.CFrame = CFrame.new(617.921631, 356.999908, -168.155212)
+end
+local function npctrader2tp()
+    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+    plr.CFrame = CFrame.new(1311.41504, 341.502625, -827.275146)
+end
+local function caesarforttp()
+    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+    plr.CFrame = CFrame.new(2969.16382, 443.249878, -1632.8595)
+end
+
+    
+
+
+
 
     
 
@@ -236,6 +266,7 @@ local b = w:CreateFolder("ESP Main") -- Creates the folder(U will put here your 
 local c = w:CreateFolder("Rare Item ESP")
 local d = w:CreateFolder("Item TPs")
 local e = w:CreateFolder("Auto Refresh")
+local f = w:CreateFolder("World Teleports")
 local b2 = w2:CreateFolder("Mods")
 --BUTTONS--
 b:Button("Item Esp",function()
@@ -265,6 +296,26 @@ end)
 
 d:Button("LaunchCode TP",function()
     LaunchCodeTP()
+end)
+
+f:Button("Nuke Room",function()
+    nukeroomtp()
+end)
+
+f:Button("NPC Trader 1",function()
+    npctrader1tp()
+end)
+
+f:Button("NPC Trader 2",function()
+    npctrader2tp()
+end)
+
+f:Button("Helios One",function()
+    heliosonetp()
+end)
+
+f:Button("Caesar's Fort",function()
+    caesarforttp()
 end)
 
 
