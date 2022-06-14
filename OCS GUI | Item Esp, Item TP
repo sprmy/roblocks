@@ -65,13 +65,16 @@ local function ItemEspRare()
     end
 end
 local function ItemEspClear()
-    local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
-    for i,v in next, nodepath:GetDescendants() do
+        local path = game:GetService("Workspace")
+        for i,v in next, path:GetDescendants() do
         if v.Name == "BillboardGui" then
                 v:Destroy()
         end
     end
 end
+    
+    
+    
 local function RareItemTP()
     local items = {
     "LaunchCodes",
@@ -190,6 +193,31 @@ local function gunmod()
     gun2["Bulletspread"] = value
 end
 
+local function StorageCrateESP()
+    local cratepath = game:GetService("Workspace").WorkspaceStuff.Zones.BuildingNodes
+    for i, v in next, cratepath:GetDescendants() do
+    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+    if v.Name == "Storage Box" then
+        for i,v in next, v:GetChildren() do
+            local bbG = Instance.new("BillboardGui")
+            local TxtLbl = Instance.new("TextLabel")
+    
+            bbG.Parent = v.Parent
+            bbG.AlwaysOnTop = true
+            bbG.Size = UDim2.new(0,15,0,15)
+            
+            TxtLbl.Parent = bbG
+            TxtLbl.BackgroundColor3 = Color3.fromRGB(0,255,0)
+            TxtLbl.BackgroundTransparency = 1
+            TxtLbl.Size = UDim2.new(5,0,5,0)
+            TxtLbl.TextColor3 = Color3.fromRGB(0,255,255)
+            TxtLbl.Text = v.Parent.Name
+            TxtLbl.TextScaled = false
+        end
+    end
+    end
+end
+
     
 
     
@@ -212,6 +240,10 @@ local b2 = w2:CreateFolder("Mods")
 --BUTTONS--
 b:Button("Item Esp",function()
     ItemEsp()
+end)
+
+b:Button("Storage Crate ESP",function()
+    StorageCrateESP()
 end)
 
 c:Button("Rare Item ESP",function()
