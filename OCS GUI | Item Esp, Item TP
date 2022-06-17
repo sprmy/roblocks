@@ -243,6 +243,34 @@ local function caesarforttp()
     plr.CFrame = CFrame.new(2969.16382, 443.249878, -1632.8595)
 end
 
+local function ItemNotification()
+    local items = {
+    "LaunchCodes",
+    "Binoculars",
+    "Minigun",
+    "Laser Gatling",
+    "RAD-Serum",
+    "FEV-Serum",
+    "T-60",
+    "APA",
+    "Tesla APA",
+    "T-50",
+    "T-51",
+    "T-45"
+}
+    local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
+    nodepath.DescendantAdded:connect(function(part)
+        if part.Name == "Part" and part.Parent:IsA("Model") then
+            if table.find(items, part.Parent.Name) then
+                 game.StarterGui:SetCore("SendNotification", {
+                Title = "Item Notifier", 
+                Text = part.Parent.Name
+                
+    })
+end
+end
+end)
+end
     
 
 
@@ -283,6 +311,10 @@ end)
 
 b:Button("Clear Esp",function()
     ItemEspClear()
+end)
+
+b:Button("Rare Item Notification",function()
+    ItemNotification()
 end)
 
 d:Button("Rare Item TP",function()
