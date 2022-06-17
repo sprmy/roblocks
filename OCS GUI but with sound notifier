@@ -1,3 +1,9 @@
+--whenever rare item detected it will also have a sound for when its in the workspace :)
+
+
+
+
+
 --FUNCTIONS--
 local function GetItems()
     for i,v in next, nodepath:GetDescendants() do
