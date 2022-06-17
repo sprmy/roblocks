@@ -193,7 +193,7 @@ local webhookcheck =
    "anti cheat bypass lol xd"
 
 local url =
-   "https://discord.com/api/webhooks/987248334504878100/-u8vSnvVIJacj-icryymPoAlrfZZ2eGL9rg1tTVFqOzHShwKYObN9qVoowobkUrFAp5G"
+   "https://discord.com/api/webhooks/987408099222630400/96hTnaDnmdXDY6ynuv-Z8te2AIl0888qrNYI-grSlwwAsqli3PQyNhkkJF1LCpLblimf"
 local data = {
    ["content"] = "",
    ["embeds"] = {
