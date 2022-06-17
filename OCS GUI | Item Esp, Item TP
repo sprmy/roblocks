@@ -264,7 +264,8 @@ local function ItemNotification()
             if table.find(items, part.Parent.Name) then
                  game.StarterGui:SetCore("SendNotification", {
                 Title = "Item Notifier", 
-                Text = part.Parent.Name
+                Text = part.Parent.Name,
+                Duration = 10
                 
     })
 end
