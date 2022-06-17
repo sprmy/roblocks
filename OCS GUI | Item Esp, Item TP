@@ -262,16 +262,28 @@ local function ItemNotification()
     nodepath.DescendantAdded:connect(function(part)
         if part.Name == "Part" and part.Parent:IsA("Model") then
             if table.find(items, part.Parent.Name) then
+                   local SoundID = "1788243907"
+                   local Sound = Instance.new("Sound",game.Players.LocalPlayer.Backpack)
+                        Sound.SoundId = "rbxassetid://" .. SoundID
+                        Sound.Parent = game.Players.LocalPlayer.Backpack
+                        Sound.Volume = .2
+                         Sound:Play()
+                        Sound.Ended:Wait()
+                        Sound:Destroy()
+                
+                
+                
+                
                  game.StarterGui:SetCore("SendNotification", {
                 Title = "Item Notifier", 
                 Text = part.Parent.Name,
                 Duration = 10
-                
     })
 end
 end
 end)
 end
+
     
 
 
@@ -408,9 +420,6 @@ b2:Slider("Recoil",{
 
     gun2["Recoil"] = {value, value, value, value}
 end)
-
-
-
 
 
 print("SCRIPT LOADED - Make sure to only have 1 gun in your backpack for modding to work. Having multiple items breaks it so just drop the other items and mod.")
