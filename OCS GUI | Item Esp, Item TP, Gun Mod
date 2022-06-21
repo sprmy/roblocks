@@ -1,4 +1,4 @@
---FUNCTIONS--
+--FUNCTIONSS--
 local function GetItems()
     for i,v in next, nodepath:GetDescendants() do
         if v.Name == "Part" then
