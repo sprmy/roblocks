@@ -72,9 +72,6 @@ local function ItemEspClear()
         end
     end
 end
-    
-    
-    
 local function RareItemTP()
     local items = {
     "LaunchCodes",
@@ -157,9 +154,10 @@ local function FEVSerumESP()
         end
     end
 end
+local Descendantconnection
 local function ESPRefresh()
     local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
-    nodepath.DescendantAdded:connect(function(part)
+    Descendantconnection = nodepath.DescendantAdded:connect(function(part)
         if part.Name == "Part" and part.Parent:IsA("Model") then
             local bbG = Instance.new("BillboardGui")
             local TxtLbl = Instance.new("TextLabel")
@@ -192,7 +190,6 @@ local function gunmod()
     gun2["ReloadSpeed"] = value
     gun2["Bulletspread"] = value
 end
-
 local function StorageCrateESP()
     local cratepath = game:GetService("Workspace").WorkspaceStuff.Zones.BuildingNodes
     for i, v in next, cratepath:GetDescendants() do
@@ -217,6 +214,7 @@ local function StorageCrateESP()
     end
     end
 end
+
 local function nukeroomtp()
     local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
 
@@ -242,7 +240,7 @@ local function caesarforttp()
 
     plr.CFrame = CFrame.new(2969.16382, 443.249878, -1632.8595)
 end
-
+local itemnotix
 local function ItemNotification()
     local items = {
     "LaunchCodes",
@@ -259,10 +257,10 @@ local function ItemNotification()
     "T-45"
 }
     local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
-    nodepath.DescendantAdded:connect(function(part)
+    itemnotix = nodepath.DescendantAdded:connect(function(part)
         if part.Name == "Part" and part.Parent:IsA("Model") then
             if table.find(items, part.Parent.Name) then
-                 game.StarterGui:SetCore("SendNotification", {
+                game.StarterGui:SetCore("SendNotification", {
                 Title = "Item Notifier", 
                 Text = part.Parent.Name
                 
@@ -271,6 +269,7 @@ end
 end
 end)
 end
+
     
 
 
@@ -312,18 +311,28 @@ end)
 b:Button("Clear Esp",function()
     ItemEspClear()
 end)
-
-b:Button("Rare Item Notification",function()
-    ItemNotification()
+local xt = false
+b:Toggle("Rare Item Notification",function(bool)
+    xt = bool
+    if xt == true then
+        ItemNotification()
+    else
+        itemnotix:Disconnect()
+    end
+    
 end)
 
 d:Button("Rare Item TP",function()
     RareItemTP()
 end)
-
+local xxt = false
 e:Toggle("Auto ESP",function(bool)
-    shared.toggle = bool
-    ESPRefresh()
+    xxt = bool
+    if xxt == true then
+        ESPRefresh()
+    else
+        Descendantconnection:Disconnect()
+    end
 end)
 
 d:Button("LaunchCode TP",function()
