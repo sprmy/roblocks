@@ -1,0 +1,50 @@
+--Shitty auto farm script. Have your angle be zoomed out above your Character
+--Alongside having your cursor be close to your feet or in the middle of screen
+
+--Change to false if want thing to stop. or just alt + f4
+_G.Toggle = true
+--LOOP WHICH AUTO EQUIPS WEAPONS TO SELL
+spawn(function() while true do
+    wait(1)
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        v.Parent = game.Players.LocalPlayer.Character
+    end
+end
+end)
+--
+local virtualUser = game:GetService('VirtualUser')
+function autofarm()
+    targetdistance = math.huge
+    local target
+    local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
+    for i,v in next, nodepath:GetDescendants() do
+        if v.Name == "Part" then
+            local cam = workspace.CurrentCamera
+            local runservice = game:GetService("RunService")
+            local pos = (v.position - plr.position).magnitude
+            if pos < targetdistance then
+			targetdistance = pos
+			target = v
+			    plr.CFrame = v.CFrame
+			    wait(1)
+                cam.CFrame = CFrame.new(cam.CFrame.p,v.CFrame.p)
+                wait()
+                mouse1click()
+                wait(2)
+                plr.CFrame = CFrame.new(-1766.13025, 373.750183, 1493.84497)
+                wait(1)
+                virtualUser:SetKeyDown('0x65')
+                wait(1)
+                virtualUser:SetKeyUp('0x65')
+                wait(3)
+            end
+        end
+    end
+end
+
+if _G.Toggle == true then
+    repeat 
+    autofarm()
+    until _G.Toggle == false
+end
