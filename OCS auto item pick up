@@ -1,0 +1,43 @@
+wait(2)
+local camera = workspace.CurrentCamera
+local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
+local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+local offset = Vector3.new(0, 100, -50)
+local currentPosition = camera.CFrame.Position
+--moves your mouse to the items position within 15 studs. 
+
+local LocalPlayer = game:GetService("Players").LocalPlayer
+LocalPlayer.CameraMaxZoomDistance = 9e9
+LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+local items = {
+    "LaunchCodes",
+    "Binoculars",
+    "Minigun",
+    "Laser Gatling",
+    "RAD-Serum",
+    "FEV-Serum",
+    "T-60",
+    "APA",
+    "Tesla APA",
+    "T-50",
+    "T-51",
+    "T-45",
+    "Pulse Rifle",
+    "Lockpick"
+}
+
+                
+while game:GetService("RunService").RenderStepped:Wait() do
+    for i,v in next, nodepath:GetDescendants() do
+        if v.Name == "Part" then
+            if table.find(items,v.Parent.Name) then
+                local vec = camera:WorldToViewportPoint(v.Position)
+                if (v.Position - plr.Position).Magnitude <= 15 then
+                    mousemoveabs(vec.X, vec.Y)
+                    wait(.1)
+                    mouse1click()
+                end
+            end
+        end
+    end
+end
