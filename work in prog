@@ -1,0 +1,106 @@
+wait(2)
+
+--Shitty auto farm script. Have your angle be zoomed out above your Character
+--Alongside having your cursor be close to your feet or in the middle of screen
+
+local LocalPlayer = game:GetService("Players").LocalPlayer
+LocalPlayer.CameraMaxZoomDistance = 9e9
+LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+local camera = workspace.CurrentCamera
+local offset = Vector3.new(0, 100, -50)
+local currentPosition = camera.CFrame.Position
+local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
+local plr = game.Players.LocalPlayer.Character.HumanoidRootPart
+local virtualUser = game:GetService('VirtualUser')
+local nodepath = game:GetService("Workspace").WorkspaceStuff.LootNodes
+local items = {
+    "Binoculars",
+    "Minigun",
+    "Laser Gatling",
+    "T-60",
+    "APA",
+    "Tesla APA",
+    "T-50",
+    "T-51",
+    "T-45",
+    "P-94 Plasma Rifle",
+    "Assault Carbine",
+    "Centurion Armor",
+    "Service Rifle",
+    "Light Machine Gun",
+    "Laser Rifle",
+    "Gobi Campaign SR",
+    "Super Sledge",
+    "Assault Rifle",
+    "Reforged Assault Carbine",
+    "Infiltrator",
+    "Marksman Rifle",
+    "All-American",
+    "Chinese Assault Rifle",
+    "12.7mm SMG",
+    "9mm SMG",
+    "Desert Ranger Armor",
+    "NCR Ranger Armor",
+    "Automatic Rifle",
+    "Cowboy Repeater",
+    "Sniper Rifle",
+    "Combat Armor",
+    "Decanus Armor",
+    "Legion Armor",
+    "Anti-Material Rifle",
+    "Binoculars"
+}
+--click 
+spawn(function()
+    while game:GetService("RunService").RenderStepped:Wait() do
+        for i,v in next, nodepath:GetDescendants() do
+            if v.Name == "Part" then
+                if table.find(items,v.Parent.Name) then
+                    local vec = camera:WorldToViewportPoint(v.Position)
+                    if (v.Position - plr.Position).Magnitude <= 15 then
+                        mousemoveabs(vec.X, vec.Y)
+                        wait(.1)
+                        mouse1click()
+                    end
+                end
+            end
+        end
+end
+end)
+    
+--LOOP WHICH AUTO EQUIPS WEAPONS TO SELL
+spawn(function() while true do
+   wait(.1)
+   for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+       v.Parent = game.Players.LocalPlayer.Character
+   end
+end
+end)
+--
+function autofarming()
+   for i,v in next, nodepath:GetDescendants() do
+       if v.Name == "Part" then
+           if table.find(items,v.Parent.Name) then
+            print(v.Parent.Name)
+            local runservice = game:GetService("RunService")
+                plr.CFrame = v.CFrame * CFrame.new(0,5,0)
+                wait(.7)
+                plr.CFrame = CFrame.new(-1772.53857, 373.85022, 1493.42444)
+                wait(.5)
+                virtualUser:SetKeyDown('0x65')
+                wait(1)
+                virtualUser:SetKeyUp('0x65')
+                wait(2.5)
+           end
+       end
+   end
+end
+
+spawn(function()
+    while wait(.5) do
+        pcall(function()
+            autofarming()
+            print("looping")
+        end)
+    end
+end)
