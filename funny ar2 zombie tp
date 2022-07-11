@@ -1,0 +1,26 @@
+--og script credits: https://v3rmillion.net/showthread.php?tid=1177910
+
+_G.anti_zombie = true
+local playername = "name"
+
+function plrthing(plr)
+    for i,v in next, game:GetService("Players"):GetChildren() do
+        if v.Name == playername then
+            print(v.Name)
+            plr = v.Character.HumanoidRootPart
+        end
+    end
+    return plr
+end
+
+local plre = plrthing(plr)
+wait(.5)
+
+while _G.anti_zombie do
+   for _, obj in next, workspace.Zombies.Mobs:GetChildren() do
+       if obj:FindFirstChild('HumanoidRootPart') and isnetworkowner(obj.HumanoidRootPart) then
+           obj.HumanoidRootPart.CFrame = plre.CFrame
+       end
+   end
+  task.wait()
+end
